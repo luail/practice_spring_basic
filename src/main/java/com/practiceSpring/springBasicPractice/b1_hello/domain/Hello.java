@@ -1,4 +1,4 @@
-package com.practiceSpring.springBasicPractice.domain;
+package com.practiceSpring.springBasicPractice.b1_hello.domain;
 
 
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package com.practiceSpring.springBasicPractice.controller;
+package com.practiceSpring.springBasicPractice.b1_hello.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.practiceSpring.springBasicPractice.domain.Hello;
+import com.practiceSpring.springBasicPractice.b1_hello.domain.Hello;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
