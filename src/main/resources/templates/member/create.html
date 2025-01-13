@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,12 +8,11 @@
     <title>member create</title>
 </head>
 <body>
-<div th:replace="member/header :: headerFragment"></div>
-  <form action="/members/create" method="post" enctype="application/x-www-form-urlencoded">
+  <form action="/pracmember/create" method="post" enctype="application/x-www-form-urlencoded">
     이름 : <input type="text" name="name">
     이메일 : <input type="text" name="email">
     비밀번호 : <input type="password" name="password">
-    <input type="submit" value="제출">
+    <button type="submit">제출</button>
   </form>
 </body>
 </html>

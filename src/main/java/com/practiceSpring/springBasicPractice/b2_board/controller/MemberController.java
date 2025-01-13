@@ -11,42 +11,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/members")
+@RequestMapping("/pracmember")
 public class MemberController {
 
     @Autowired
     private MemberService memberService;
 
-//    홈화면
+//   홈화면
     @GetMapping("")
     public String home() {
-        return "member/member-home";
+        return "/member/home";
     }
 
 //    회원목록조회
     @GetMapping("/list")
     public String memberList(Model model) {
         List<MemberListRes> memberListResList = memberService.findAll();
-        model.addAttribute("modelList", memberListResList);
-        return "/member/member-list";
+        model.addAttribute("memberList",memberListResList);
+        return "/member/list";
     }
-
 //    회원상세조회
     @GetMapping("/detail/{id}")
     public String memberDetail(@PathVariable Long id) {
         System.out.println(id);
-        return "/member/member-detail";
+        return "/member/detail";
     }
-
 //    회원가입
     @GetMapping("/create")
     public String memberCreate() {
-        return "/member/member-create";
+        return "/member/create";
     }
 
     @PostMapping("/create")
     public String memberCreatePost(@ModelAttribute MemberReqDto memberReqDto) {
         memberService.save(memberReqDto);
-        return "redirect:/members/list";
+        return "redirect:/pracmember/list";
     }
 }
