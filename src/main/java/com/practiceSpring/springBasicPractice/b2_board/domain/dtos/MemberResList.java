@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MemberReqList {
+public class MemberResList {
     private Long id;
     private String name;
     private String email;

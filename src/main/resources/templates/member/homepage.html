@@ -5,12 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>home page</title>
 </head>
 <body>
-    <div th:fragment="headerFragment">
-        <a href="/memberPrac2/listPage">회원목록조회</a>
-        <a href="/memberPrac2/createPage">회원등록</a>
-    </div>
+  <div th:replace="member/header :: headerFragment"></div>
+  <div>Welcome home page</div>
 </body>
 </html>

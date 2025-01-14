@@ -1,65 +1,61 @@
 package com.practiceSpring.springBasicPractice.b2_board.controller;
 
 import com.practiceSpring.springBasicPractice.b2_board.domain.dtos.MemberCreateDto;
-import com.practiceSpring.springBasicPractice.b2_board.domain.dtos.MemberReqList;
 import com.practiceSpring.springBasicPractice.b2_board.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 
 @Controller
-@RequestMapping("/newprac1")
+@RequiredArgsConstructor
+@RequestMapping("/memberPrac2")
 public class MemberController {
+//    DI(디펜던시 인젝션) 주입 3번
+//    memberService를 final로 선언하며, 클래스의 위에 RequiredArgs어노테이션.
+    private final MemberService memberService;
 
-//    DI(의존성 주입) 1번
-    @Autowired
-    private MemberService memberService;
-
-//    case1. 홈화면
+//    1. 홈화면
     @GetMapping("")
-    public String home() {
-        return "/member/home";
+    public String homepage() {
+        return "/member/homepage";
     }
 
-//    case2. 회원목록조회
-    @GetMapping("/lists")
-    public String memberLists(Model model) {
-        model.addAttribute("memberList",memberService.findAll());
-        return "/member/lists";
+//    2. 회원전체조회
+    @GetMapping("/listPage")
+    public String memberListPage(Model model) {
+        model.addAttribute("memberList" ,memberService.findAll());
+        return "/member/listPage";
     }
 
-//    case3. 회원가입
-    @GetMapping("/create")
-    public String memberCreate() {
-        return "/member/create";
-    }
-
-    @PostMapping("/create")
-    public String memberCreatePost(MemberCreateDto memberCreateDto, Model model) {
+//    3.회원상세조회
+    @GetMapping("/detailPage/{id}")
+    public String detailPage(@PathVariable Long id, Model model) {
         try {
-            memberService.save(memberCreateDto);
-            return "redirect:/newprac1/lists";
-        } catch (IllegalArgumentException e) {
+            model.addAttribute("member", memberService.findById(id));
+            return "/member/detailPage";
+        } catch (NoSuchElementException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "/member/error";
+            return "/member/errorPage";
         }
     }
 
-//    case4. 회원 상세조회
-    @GetMapping("/detail/{id}")
-    public String memberDetail(@PathVariable Long id, Model model) {
+//    4. 회원가입
+    @GetMapping("/createPage")
+    public String createPage() {
+        return ("/member/createPage");
+    }
+
+    @PostMapping("/createPage")
+    public String createPagePost(@ModelAttribute MemberCreateDto memberCreateDto, Model model) {
         try {
-            model.addAttribute("memberDetail" ,memberService.findById(id));
-            return "/member/detail";
-        } catch (NoSuchElementException e) {
-            model.addAttribute("errorMessage",e.getMessage());
-            return "/member/error";
+            memberService.save(memberCreateDto);
+            return "redirect:/memberPrac2/listPage";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "/member/errorPage";
         }
     }
 }

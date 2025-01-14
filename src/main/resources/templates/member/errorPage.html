@@ -5,10 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>error</title>
+    <title>error page</title>
 </head>
 <body>
-  <h1>에러가 발생했습니다.</h1>
+  <div th:replace="member/header :: headerFragment"></div>
+  <h1>에러가 발생!</h1>
   <div th:text="${errorMessage}"></div>
 </body>
 </html>
