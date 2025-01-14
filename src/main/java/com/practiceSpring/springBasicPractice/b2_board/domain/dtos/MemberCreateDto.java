@@ -14,7 +14,7 @@ public class MemberCreateDto {
     private String email;
     private String password;
 
-    public Member toEntity() {
+    public Member memberFromDto() {
         return new Member(MemberMemoryRepository.id, this.name, this.email, this.password);
     }
 }

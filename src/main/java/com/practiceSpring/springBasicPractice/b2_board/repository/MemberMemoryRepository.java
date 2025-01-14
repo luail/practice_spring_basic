@@ -9,31 +9,32 @@ import java.util.Optional;
 
 @Repository
 public class MemberMemoryRepository {
+    List<Member> memberList = new ArrayList<>();
+
     public static Long id = 1L;
 
-    List<Member> members = new ArrayList<>();
-
     public List<Member> findAll() {
-        return members;
+        return memberList;
     }
 
     public void save(Member member) {
-        members.add(member);
+        memberList.add(member);
         id++;
     }
 
     public Optional<Member> findById(Long id) {
         Member member = null;
-        for (Member m : members) {
+        for (Member m : memberList) {
             if (m.getId().equals(id)) {
                 member = m;
             }
         }
         return Optional.ofNullable(member);
     }
+
     public Optional<Member> findByEmail(String email) {
         Member member = null;
-        for (Member m : members) {
+        for (Member m : memberList) {
             if (m.getEmail().equals(email)) {
                 member = m;
             }
